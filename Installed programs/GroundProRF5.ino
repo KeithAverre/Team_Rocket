@@ -4,7 +4,7 @@
   Task 1: Recieve datastream from on-board Pro-RF via RF transmission
   Version Info: v5.0 11/6/22 16:51
   Notes: Based on example client radio 2
-  Author: David Schull
+  Authors: David Schull & Keith Averre
   References:
   Fischer Moseley @ SparkFun Electronics
 ******************************************************************************/

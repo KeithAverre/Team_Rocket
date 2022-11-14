@@ -6,6 +6,7 @@
   Task 3: Send datastream to on-board Pro RF via serial UART RX/TX  
   Version Info: v4.0 11/8/22 19:27
   Notes: Based on example client radio 2 & 3 Stage QWIIC Button Shell On-Board w/ OLED V3
+  Authors: David Schull & Keith Averre
   References:
   Fischer Moseley @ SparkFun Electronics
   David A. Mellis @ Arduino
@@ -89,6 +90,7 @@ void setup() {
   /* DISABLE OLED
   initiateOledDisplay(); // Check if the QWIIC OLED display us online
   */
+
   // Where is this pinMode used? From example? Review for removal.
   pinMode(LED_BUILTIN, OUTPUT); // Initilize the digital pin LED_BUILTIN as output
   stopOpenLogArtemis(); // Stop logging at startup - required for syncrynozation
@@ -98,8 +100,6 @@ void setup() {
 // MAIN LOOP  ////////////////////////////////////////////////////////////////
 
 void loop() {
-
-
   while (masterState == 0) { // Pre-Flight Mode (State 1)
     if (displayHistory != 1) { // Show the message, but only once
       messageState0(); // Display state via serial console
@@ -311,7 +311,6 @@ void stopOpenLogArtemis(){
     digitalWrite(stopLoggingPin32, LOW); // Start with logging off on the OLA
     redButton.LEDon(state2Brightness); // Flash the red button LED high
   }
-
   digitalWrite(blueLed1Pin, LOW); // Turn blue status LED off
   Serial.println("OLA stop attempted"); 
 }
@@ -320,15 +319,14 @@ void stopOpenLogArtemis(){
 void greenLedBlink(int blinkSpeed) {
 
   unsigned long currentMillis = millis();
-
   if (currentMillis - previousMillis >= blinkSpeed) {
     // save the last time you blinked the LED
     previousMillis = currentMillis;
-
     // if the LED is off turn it on and vice-versa:
     if (ledState == LOW) {
       ledState = HIGH;
-    } else {
+    } 
+    else {
       ledState = LOW;
     }
 

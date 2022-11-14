@@ -5,7 +5,7 @@
   Task 2: Recieve datastream to ground Pro-RF via RF transmission
   Version Info: v5.0 11/6/22 16:51
   Notes: Based on example server client 1
-  Author: David Schull
+  Authors: David Schull & Keith Averre
   References:
   Fischer Moseley @ SparkFun Electronics
 ******************************************************************************/
@@ -32,6 +32,9 @@ void setup() {
   //Initialize the Radio. 
   if (rf95.init() == false) {
     //SerialUSB.println("Radio Init Failed - Freezing");
+
+    //This is a waiting period, this will continue due to hardware initization automatically.
+    //Please do not call this an error on code review.
     while (1);
   } 
   else {
@@ -58,7 +61,8 @@ void recordFlightDataPacket() {
     if (rc != endMarker) {
       receivedChars[ndx] = rc;
       ndx++;
-    } else {
+    } 
+    else {
       receivedChars[ndx] = '\0'; // terminate the string
       ndx = 0;
       newData = true;
@@ -86,7 +90,7 @@ void sendFlightDataPacketRadio() {
     //SerialUSB.print(" sent.");
     // SerialUSB.println("");
     newData = false;
-   delay(250);
+    delay(250);
   }
 
 }
